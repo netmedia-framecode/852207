@@ -145,6 +145,7 @@ require_once("../templates/views_top.php"); ?>
                   $id_lokasi = $row['id_lokasi'];
 
                   if ($id_tipe_lokasi == 1) {
+                    $lokasi_image = "wisata";
                     $lokasi = "SELECT tempat_wisata.nama_wisata as nama, tempat_wisata.image_wisata as image, tempat_wisata.deskripsi, desa.desa, jenis_wisata.jenis_wisata 
                       FROM tempat_wisata 
                       JOIN desa ON tempat_wisata.id_desa=desa.id_desa 
@@ -152,6 +153,7 @@ require_once("../templates/views_top.php"); ?>
                       WHERE tempat_wisata.id_wisata=$id_lokasi
                     ";
                   } else if ($id_tipe_lokasi == 2) {
+                    $lokasi_image = "fasilitas";
                     $lokasi = "SELECT fasilitas.nama_fasilitas as nama, fasilitas.image_fasilitas as image, NULL as deskripsi, NULL as desa, NULL as jenis_wisata 
                       FROM fasilitas
                       WHERE fasilitas.id_fasilitas=$id_lokasi
@@ -169,8 +171,7 @@ require_once("../templates/views_top.php"); ?>
                     $pin = "pin-wisata-sejarah.png";
                   } else {
                     $pin = "pin-fasilitas.png";
-                  }
-              ?>
+                  } ?>
                   var customIcon = L.icon({
                     iconUrl: '../assets/img/<?= $pin ?>',
                     iconSize: [32, 32],
@@ -183,10 +184,10 @@ require_once("../templates/views_top.php"); ?>
                     icon: customIcon
                   }).bindPopup(
                     "<div>" +
-                    "<img src='../assets/img/wisata/<?= $data_lokasi['image'] ?>' style='width: 250px; height: 150px; object-fit: cover;' alt=''>" +
-                    "<h5 style='margin-top: 5px;'><?= $data_lokasi['nama'] ?></h5>" +
-                    "<p style='margin-top: -5px;'><?= $data_lokasi['desa'] ?></p>" +
-                    "<p style='margin-top: -5px;'><?= $data_lokasi['deskripsi'] ?></p>" +
+                    "<img src='../assets/img/<?= $lokasi_image ?>/<?= $data_lokasi['image'] ?>' style='width: 250px; height: 150px; object-fit: cover;' alt=''>" +
+                    "<h4 style='margin-top: 5px;'><?= $data_lokasi['nama'] ?></h4>" +
+                    "<p style='margin-top: -5px; font-size: 14px;'><?= $data_lokasi['desa'] ?></p>" +
+                    "<p style='margin-top: -5px; font-size: 12px;'><?= $data_lokasi['deskripsi'] ?></p>" +
                     "</div>"
                   ).addTo(map);
 

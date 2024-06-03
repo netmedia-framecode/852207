@@ -119,11 +119,8 @@ require_once("../templates/views_top.php"); ?>
                               <input type="text" name="nama_wisata" value="<?= $data['nama_wisata'] ?>" class="form-control" id="nama_wisata" minlength="3" required>
                             </div>
                             <div class="form-group">
-                              <label for="deskripsi">Deskripsi</label>
-                              <textarea name="deskripsi<?= $data['id_wisata'] ?>" class="form-control" id="deskripsi" rows="3"><?= $data['deskripsi'] ?></textarea>
-                              <script>
-                                CKEDITOR.replace('deskripsi<?= $data['id_wisata'] ?>');
-                              </script>
+                              <label for="">Deskripsi</label>
+                              <textarea name="deskripsi" class="form-control" id="" rows="3"><?= $data['deskripsi'] ?></textarea>
                             </div>
                             <div class="form-group">
                               <label for="id_desa">Desa</label>
@@ -221,8 +218,8 @@ require_once("../templates/views_top.php"); ?>
               <input type="text" name="nama_wisata" class="form-control" id="nama_wisata" minlength="3" required>
             </div>
             <div class="form-group">
-              <label for="deskripsi">Deskripsi</label>
-              <textarea name="deskripsi" class="form-control" id="deskripsi" rows="3"></textarea>
+              <label for="">Deskripsi</label>
+              <textarea name="deskripsi" class="form-control" id="" rows="3"></textarea>
             </div>
             <div class="form-group">
               <label for="id_desa">Desa</label>

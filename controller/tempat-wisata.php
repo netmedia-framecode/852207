@@ -54,10 +54,10 @@ if (isset($_POST["export_wisata"])) {
 	}
 }
 if (isset($_POST["edit_tempat_wisata"])) {
-	$validated_post = array_map(function ($value) use ($conn) {
-		return valid($conn, $value);
-	}, $_POST);
-	if (tempat_wisata($conn, $validated_post, $action = 'update', $fasilitas_id = $_POST['id_fasilitas']) > 0) {
+	// $validated_post = array_map(function ($value) use ($conn) {
+	// 	return valid($conn, $value);
+	// }, $_POST);
+	if (tempat_wisata($conn, $_POST, $action = 'update', $fasilitas_id = $_POST['id_fasilitas']) > 0) {
 		$message = "Tempat wisata " . $_POST['nama_wisataOld'] . " berhasil diubah.";
 		$message_type = "success";
 		alert($message, $message_type);
