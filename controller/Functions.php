@@ -1074,12 +1074,6 @@ if (isset($_SESSION["project_wisata_mollo_utara"]["users"])) {
       $sql = "INSERT INTO tempat_wisata(id_wisata,id_jenis_wisata,id_desa,image_wisata,nama_wisata,deskripsi) VALUES('$id_wisata','$data[id_jenis_wisata]','$data[id_desa]','$image_wisata','$data[nama_wisata]','$data[deskripsi]')";
       mysqli_query($conn, $sql);
       if (isset($fasilitas_id)) {
-        $check_data = "SELECT * FROM fasilitas_wisata WHERE id_wisata='$id_wisata'";
-        $data_fasilitas = mysqli_query($conn, $check_data);
-        if (mysqli_num_rows($data_fasilitas) > 0) {
-          $sql = "DELETE FROM fasilitas_wisata WHERE id_wisata='$id_wisata'";
-          mysqli_query($conn, $sql);
-        }
         $count_fasilitas = count($fasilitas_id);
         for ($i = 0; $i < $count_fasilitas; $i++) {
           $id_fasilitas = $fasilitas_id[$i];
@@ -1163,18 +1157,17 @@ if (isset($_SESSION["project_wisata_mollo_utara"]["users"])) {
       }
       $sql = "UPDATE tempat_wisata SET id_jenis_wisata='$data[id_jenis_wisata]', id_desa='$data[id_desa]', image_wisata='$image_wisata', nama_wisata='$data[nama_wisata]', deskripsi='$data[deskripsi]' WHERE id_wisata='$data[id_wisata]'";
       mysqli_query($conn, $sql);
+      $check_data = "SELECT * FROM fasilitas_wisata WHERE id_wisata='$data[id_wisata]'";
+      $data_fasilitas = mysqli_query($conn, $check_data);
+      if (mysqli_num_rows($data_fasilitas) > 0) {
+        $sql = "DELETE FROM fasilitas_wisata WHERE id_wisata='$data[id_wisata]'";
+        mysqli_query($conn, $sql);
+      }
       if (isset($fasilitas_id)) {
-        $check_data = "SELECT * FROM fasilitas_wisata WHERE id_wisata='$data[id_wisata]'";
-        $data_fasilitas = mysqli_query($conn, $check_data);
-        if (mysqli_num_rows($data_fasilitas) > 0) {
-          $sql = "DELETE FROM fasilitas_wisata WHERE id_wisata='$data[id_wisata]'";
-          mysqli_query($conn, $sql);
-        }
         $count_fasilitas = count($fasilitas_id);
         for ($i = 0; $i < $count_fasilitas; $i++) {
           $id_fasilitas = $fasilitas_id[$i];
-          $id_wisata = $data['id_wisata'];
-          $sql = "INSERT INTO fasilitas_wisata(id_wisata, id_fasilitas) VALUES('$id_wisata', '$id_fasilitas')";
+          $sql = "INSERT INTO fasilitas_wisata(id_wisata, id_fasilitas) VALUES('$data[id_wisata]', '$id_fasilitas')";
           mysqli_query($conn, $sql);
         }
       }
