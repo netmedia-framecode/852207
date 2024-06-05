@@ -114,7 +114,7 @@ require_once("../templates/views_top.php"); ?>
       <div id="map" class="shadow" style="width: 100%; height: 930px;z-index: 0;"></div>
 
       <script>
-        var map = L.map('map').setView([-9.7187444, 124.1151441], 12);
+        var map = L.map('map').setView([-9.7260034, 124.2259519], 13);
         var tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {}).addTo(map);
 
         // get coordinat location

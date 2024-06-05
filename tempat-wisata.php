@@ -55,20 +55,33 @@ require_once("templates/top.php"); ?>
   <div class="container">
     <div class="row">
       <?php foreach ($view_tempat_wisata_detail as $data_tw) { ?>
-          <div class="card" style="margin-bottom: 50px;">
-            <div class="row no-gutters">
-              <div class="col-md-4">
-                <img src="assets/img/wisata/<?= $data_tw['image_wisata'] ?>" style="width: 100%; height: 500px; object-fit: cover;" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h2 class="card-title" style="margin-top: 0px;"><?= $data_tw['nama_wisata'] ?></h2>
-                  <p class="card-text"><?= $data_tw['desa']; ?></p>
-                  <p class="card-text"><?= $data_tw['deskripsi']; ?></p>
-                </div>
+        <div class="card" style="margin-bottom: 50px;">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img src="assets/img/wisata/<?= $data_tw['image_wisata'] ?>" style="width: 100%; height: 500px; object-fit: cover;" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h2 class="card-title" style="margin-top: 0px;"><?= $data_tw['nama_wisata'] ?></h2>
+                <p class="card-text"><?= $data_tw['desa']; ?></p>
+                <p class="card-text"><?= $data_tw['deskripsi']; ?></p>
+                <h5>Fasilitas :</h5>
+                <ul>
+                  <?php $id_tw = $data_tw['id_wisata'];
+                  $fasilitas_wisata = "SELECT * FROM fasilitas_wisata JOIN fasilitas ON fasilitas_wisata.id_fasilitas=fasilitas.id_fasilitas WHERE fasilitas_wisata.id_wisata='$id_tw'";
+                  $view_fasilitas_wisata = mysqli_query($conn, $fasilitas_wisata);
+                  if (mysqli_num_rows($view_fasilitas_wisata) > 0) {
+                    while ($data_fw = mysqli_fetch_assoc($view_fasilitas_wisata)) { ?>
+                      <li>
+                        <p><?= $data_fw['nama_fasilitas'] ?></p>
+                      </li>
+                  <?php }
+                  } ?>
+                </ul>
               </div>
             </div>
           </div>
+        </div>
       <?php } ?>
     </div>
   </div>

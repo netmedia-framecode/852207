@@ -11,7 +11,7 @@ require_once("templates/top.php"); ?>
   <div class="sm-img-bg-fullscr parallax-section">
     <div id="map" class="shadow mt-n4" style="width: 100%; height: 140vh;z-index: 0;"></div>
     <script>
-      var map = L.map('map').setView([-9.7187444, 124.1151441], 12);
+      var map = L.map('map').setView([-9.7260034, 124.2259519], 13);
       var tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {}).addTo(map);
 
       var iconLock = L.icon({
@@ -60,7 +60,7 @@ require_once("templates/top.php"); ?>
 
           if ($id_tipe_lokasi == 1) {
             $lokasi_image = "wisata";
-            $lokasi = "SELECT tempat_wisata.nama_wisata as nama, tempat_wisata.image_wisata as image, tempat_wisata.deskripsi, desa.desa, jenis_wisata.jenis_wisata 
+            $lokasi = "SELECT tempat_wisata.id_wisata as id, tempat_wisata.nama_wisata as nama, tempat_wisata.image_wisata as image, tempat_wisata.deskripsi, desa.desa, jenis_wisata.jenis_wisata 
             FROM tempat_wisata 
             JOIN desa ON tempat_wisata.id_desa=desa.id_desa 
             JOIN jenis_wisata ON tempat_wisata.id_jenis_wisata=jenis_wisata.id_jenis_wisata 
@@ -68,7 +68,7 @@ require_once("templates/top.php"); ?>
           ";
           } else if ($id_tipe_lokasi == 2) {
             $lokasi_image = "fasilitas";
-            $lokasi = "SELECT fasilitas.nama_fasilitas as nama, fasilitas.image_fasilitas as image, NULL as deskripsi, NULL as desa, NULL as jenis_wisata 
+            $lokasi = "SELECT fasilitas.id_fasilitas as id, fasilitas.nama_fasilitas as nama, fasilitas.image_fasilitas as image, NULL as deskripsi, NULL as desa, NULL as jenis_wisata 
             FROM fasilitas
             WHERE fasilitas.id_fasilitas=$id_lokasi
           ";
@@ -99,10 +99,10 @@ require_once("templates/top.php"); ?>
           }).bindPopup(
             "<div>" +
             "<img src='assets/img/<?= $lokasi_image ?>/<?= $data_lokasi['image'] ?>' style='width: 250px; height: 150px; object-fit: cover;' alt=''>" +
-            "<h4 style='margin-top: 5px;'><?= $data_lokasi['nama'] ?></h4>" +
+            "<h2 style='margin-top: 5px;'><?= $data_lokasi['nama'] ?></h2>" +
             "<p style='margin-top: -5px; font-size: 14px;'><?= $data_lokasi['desa'] ?></p>" +
             "<p style='margin-top: -5px; font-size: 12px;'><?= $data_lokasi['deskripsi'] ?></p>" +
-            "</div>"
+            "<?php if ($id_tipe_lokasi == 1) {$id_tw = $data_lokasi['id']; $fasilitas_wisata = "SELECT * FROM fasilitas_wisata JOIN fasilitas ON fasilitas_wisata.id_fasilitas=fasilitas.id_fasilitas WHERE fasilitas_wisata.id_wisata='$id_tw'"; $view_fasilitas_wisata = mysqli_query($conn, $fasilitas_wisata); if (mysqli_num_rows($view_fasilitas_wisata) > 0) {echo "<h4 style='margin-top: 5px;'>Fasilitas</h4><ul>"; while ($data_fw = mysqli_fetch_assoc($view_fasilitas_wisata)) { ?> <li> <p style='margin-top: -5px; font-size: 12px;'><?= $data_fw['nama_fasilitas'] ?></p> </li> <?php }echo "</ul>";}} ?> </div>"
           ).addTo(map);
 
       <?php }
