@@ -63,6 +63,7 @@ require_once("templates/top.php"); ?>
             <div class="col-md-8">
               <div class="card-body">
                 <h2 class="card-title" style="margin-top: 0px;"><?= $data_tw['nama_wisata'] ?></h2>
+                <h5 class="card-title" style="margin-top: -15px;"><?= $data_tw['jenis_wisata'] ?></h5>
                 <p class="card-text"><?= $data_tw['desa']; ?></p>
                 <p class="card-text"><?= $data_tw['deskripsi']; ?></p>
                 <h5>Fasilitas :</h5>
