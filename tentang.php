@@ -61,7 +61,7 @@ require_once("templates/top.php"); ?>
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-md-offset-6 fes7-text-cont p-80-cont">
-        <h1><span class="font-light">Wilayah Potensi Wisata Alam di Kecamatan Mollo Utara</span></h1>
+        <h1><span class="font-light">Wilayah Potensi Wisata di Kecamatan Mollo Utara</span></h1>
         <p class="mb-60">
           <?php
           foreach ($view_tentang as $data_tentang) {
