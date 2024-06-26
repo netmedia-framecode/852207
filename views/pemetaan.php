@@ -80,9 +80,9 @@ require_once("../templates/views_top.php"); ?>
                         WHERE tempat_wisata.id_wisata=$id_lokasi
                       ";
                     } else if ($id_tipe_lokasi == 2) {
-                      $lokasi = "SELECT fasilitas_wisata.nama_wisata as nama, fasilitas_wisata.image_fasilitas as image, NULL as desa 
-                        FROM fasilitas_wisata 
-                        WHERE fasilitas_wisata.id_wisata=$id_lokasi
+                      $lokasi = "SELECT fasilitas.nama_fasilitas as nama, fasilitas.image_fasilitas as image, NULL as desa 
+                        FROM fasilitas 
+                        WHERE fasilitas.id_fasilitas=$id_lokasi
                       ";
                     }
                     $view_lokasi = mysqli_query($conn, $lokasi);
